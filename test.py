@@ -1,8 +1,10 @@
-#import socket
-from socketIO_client import SocketIO, LoggingNamespace
+from socket import *
+#from socketIO_client import SocketIO, LoggingNamespace
+#import socketio
 import sys
 
-host = '192.168.1.83'
+#host = '192.168.1.83'
+host = 'localhost'
 port = 5003
 
 
@@ -17,9 +19,41 @@ port = 5003
 #sock.connect((host, port))
 
 try:
-    socketIO = SocketIO(host, port)
-    socketIO.emit('aaa')
-    socketIO.wait(seconds=1)
+    #socketIO = SocketIO(host, port)
+    #socketIO.emit('aaa')
+    #socketIO.wait(seconds=1)
+
+    #sio = socketio.Client()
+    #@sio.event
+    #def message(data):
+        #print('received message')
+
+    #@sio.event
+    #def connect():
+        #print('connected')
+
+    #sio.connect('http:\/\/localhost:5003')
+    #sio.connect('192.168.1.1:5003')
+    #sio.emit('message', 'hello')
+
+    #client = socket(AF_UNIX, SOCK_STREAM)
+    #client = socket()
+    #client.connect('192.168.1.1:5003')
+    #client.connect(('192.168.1.1', 5003))
+    #client.send('hey'.encode())
+
+
+    #client = socket(AF_INET, SOCK_DGRAM)
+    client = socket(AF_INET, SOCK_STREAM)
+    server_address = ('192.168.1.1', 5003)
+    client.connect(server_address)
+    #message = 'this is the message'
+    message = input()
+    client.sendall(message.encode())
+
+    #message = 'hello motherfucker'
+    #client.sendto(message.encode(), ('192.168.1.1', 5003))
+    
     #message = "this is a message"
     #sock.send(message)
     #for i in range(1):
@@ -32,9 +66,8 @@ try:
     #amount_expected = len(message)
 
 
-
-except:
-    print("error")
+except Exception as e:
+    print(e)
 finally:
     print('closing socket')
     #sock.close()

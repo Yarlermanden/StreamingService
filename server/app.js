@@ -51,6 +51,13 @@ const getApiAndEmit = socket => {
 };
 
 
+function writeValueToSockets(message) {
+	for (i = 0; i < sockets.length; i++){
+		sockets[i].emit('newMessage', message)
+	}
+}
+
+/*
 const server1 = http.createServer(app);
 const io1 = socketIo(server1, {
 	cors: {
@@ -70,9 +77,39 @@ io1.on('connection', (socket) => {
 		console.log('client disconnected');
 	})
 })
+*/
+
+
+const net = require('net')
+net.createServer(function(socket) {
+	console.log('connected: ' + socket.remoteAddress + ':' + socket.remotePort)
+	socket.on('data', function(data) {
+		console.log('DATA ' + socket.remoteAddress + ': ' + data)
+		writeValueToSockets(data)
+		//socket.write('you said "' + data + '"')
+		message = data
+	})
+
+	socket.on('close', function(data) {
+		console.log('CLOSED: ' + socket.remoteAddress + ' ' + socket.remotePort)
+	})
+}).listen(5003, () => console.log('Listen on port 5003'))
+
+
+
+
+/*
+const handler = (socket) => {
+	socket.on('message', (bytes) => {
+		const message = bytes.toString()
+
+		console.log(message)
+	})
+}
+
+net.createServer(handler).listen(5003, () => console.log('Listen on port ' + 5003))
+*/
+//server1.listen(5003, () => console.log('Listen on port ' + 5003));
 
 
 server.listen(port, () => console.log('Listen on port ' + port));
-server1.listen(5003, () => console.log('Listen on port ' + 5003));
-
-
