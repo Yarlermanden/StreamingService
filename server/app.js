@@ -50,7 +50,26 @@ const getApiAndEmit = socket => {
 	//socket.emit('message', response);
 };
 
-server.listen(port, () => console.log('Listen on port ${port}'));
 
+const server1 = http.createServer(app);
+const io1 = socketIo(server1, {
+	cors: {
+		origin: true,
+		methods: ["GET", "POST"],
+		allowedHeaders: ["my-custom-header"],
+		credentials: true
+	}
+});
+
+io1.on('connection', (socket) => {
+	console.log('backend client connected');
+	socket.on('disconnect', () => {
+		console.log('client disconnected');
+	})
+})
+
+
+server.listen(port, () => console.log('Listen on port ' + port));
+server1.listen(5003, () => console.log('Listen on port ' + 5003));
 
 
