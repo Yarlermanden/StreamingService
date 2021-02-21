@@ -63,6 +63,9 @@ const io1 = socketIo(server1, {
 
 io1.on('connection', (socket) => {
 	console.log('backend client connected');
+	socket.on('message', data => {
+		console.log(data)
+	})
 	socket.on('disconnect', () => {
 		console.log('client disconnected');
 	})
