@@ -61,29 +61,6 @@ function writeValueToSockets(message) {
 	}
 }
 
-/*
-const server1 = http.createServer(app);
-const io1 = socketIo(server1, {
-	cors: {
-		origin: true,
-		methods: ["GET", "POST"],
-		allowedHeaders: ["my-custom-header"],
-		credentials: true
-	}
-});
-
-io1.on('connection', (socket) => {
-	console.log('backend client connected');
-	socket.on('message', data => {
-		console.log(data)
-	})
-	socket.on('disconnect', () => {
-		console.log('client disconnected');
-	})
-})
-*/
-
-
 const net = require('net')
 net.createServer(function(socket) {
 	console.log('connected: ' + socket.remoteAddress + ':' + socket.remotePort)
@@ -98,22 +75,5 @@ net.createServer(function(socket) {
 		console.log('CLOSED: ' + socket.remoteAddress + ' ' + socket.remotePort)
 	})
 }).listen(5003, () => console.log('Listen on port 5003'))
-
-
-
-
-/*
-const handler = (socket) => {
-	socket.on('message', (bytes) => {
-		const message = bytes.toString()
-
-		console.log(message)
-	})
-}
-
-net.createServer(handler).listen(5003, () => console.log('Listen on port ' + 5003))
-*/
-//server1.listen(5003, () => console.log('Listen on port ' + 5003));
-
 
 server.listen(port, () => console.log('Listen on port ' + port));
