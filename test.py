@@ -45,11 +45,13 @@ try:
 
     #client = socket(AF_INET, SOCK_DGRAM)
     client = socket(AF_INET, SOCK_STREAM)
-    server_address = ('192.168.1.1', 5003)
+    server_address = ('192.168.1.83', 5003)
     client.connect(server_address)
     #message = 'this is the message'
-    message = input()
-    client.sendall(message.encode())
+    message = ""
+    while(message != 'q'):
+        message = input()
+        client.sendall(message.encode())
 
     #message = 'hello motherfucker'
     #client.sendto(message.encode(), ('192.168.1.1', 5003))

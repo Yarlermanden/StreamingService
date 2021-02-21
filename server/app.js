@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
 const getApiAndEmit = socket => {
 	const response = new Date();
 	for (i = 0; i < sockets.length; i++) {
-		sockets[i].emit('message', response)
+		sockets[i].emit('message1', response)
 	}
 	console.log(response)
 	//socket.emit('message', response);
@@ -52,8 +52,12 @@ const getApiAndEmit = socket => {
 
 
 function writeValueToSockets(message) {
+	console.log('writing message: ' + message)
+	//const response = new Date();
+	const response = new String(message);
 	for (i = 0; i < sockets.length; i++){
-		sockets[i].emit('newMessage', message)
+		//sockets[i].emit('message', {msg: message})
+		sockets[i].emit('message', response)
 	}
 }
 
