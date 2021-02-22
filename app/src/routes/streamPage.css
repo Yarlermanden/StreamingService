@@ -26,13 +26,18 @@
 	width: 1000px;
 }
 
+.outerInformationDiv {
+	display: flex;
+	justify-content: center;
+}
+
 .informationDiv {
 	display: grid;
 	grid-gap: 20px;
-	grid-template-columns: 4fr 8fr 8fr;
+	grid-template-columns: 8fr 8fr 8fr;
 }
 
-.visualInformationDiv {
+.directionDiv {
 	grid-row-start: 1;
 	grid-column-start: 2;
 }
@@ -60,5 +65,10 @@
 .textInformationDiv {
 	grid-row-start: 1;	
 	grid-column-start: 1;
+}
+
+.slopeDiv {
+	grid-row-start:1;
+	grid-column-start:3;
 }
 

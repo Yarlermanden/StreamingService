@@ -58,21 +58,28 @@ function Stream() {
 					<p>
 						Time: <time dateTime={response}>{response}</time>
 					</p>
-					<div class="informationDiv">
-						<div class="visualInformationDiv">
-							<p> Desired direction: </p>
-							<div class="outerCircle">
-								<div class="innerCircle">
+					<div class="outerInformationDiv">
+						<div class="informationDiv">
+							<div class="textInformationDiv">
+								<p> Time since start: {time}s </p> 
+								<p> Distance travelled: {distance}m </p>
+								<p> Current speed: {speed}km/t </p>
+								<p> FPS: {fps} </p>
+								<p> xSlope: {xSlope}° </p>
+								<p> ySlope: {ySlope}° </p>
+							</div>
+							<div class="directionDiv">
+								<p> Desired direction: </p>
+								<div class="outerCircle">
+									<div class="innerCircle">
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="textInformationDiv">
-							<p> Time since start: {time}s </p> 
-							<p> Distance travelled: {distance}m </p>
-							<p> Current speed: {speed}km/t </p>
-							<p> FPS: {fps} </p>
-							<p> xSlope: {xSlope}° </p>
-							<p> ySlope: {ySlope}° </p>
+							<div class="slopeDiv">
+								<p> This should contain some
+									<br/> 
+									kind of slope graph </p>
+							</div>
 						</div>
 					</div>
 				</div>
