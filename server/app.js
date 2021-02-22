@@ -52,23 +52,38 @@ const getApiAndEmit = socket => {
 
 
 function writeValueToSockets(message) {
-	console.log('writing message: ' + message)
-	//const response = new Date();
 	const response = new String(message);
 	for (i = 0; i < sockets.length; i++){
-		//sockets[i].emit('message', {msg: message})
 		sockets[i].emit('message', response)
 	}
 }
 
+var combinedMessage = ""
 const net = require('net')
 net.createServer(function(socket) {
-	console.log('connected: ' + socket.remoteAddress + ':' + socket.remotePort)
 	socket.on('data', function(data) {
-		console.log('DATA ' + socket.remoteAddress + ': ' + data)
-		writeValueToSockets(data)
-		//socket.write('you said "' + data + '"')
-		message = data
+		var text = data.toString()
+		if (text.includes("   done   ")) {
+			stringList = text.split("   done   ")
+			if(stringList[0].length > 0) {
+				combinedMessage += stringList[0]
+				console.log("combining first half")
+			}
+			console.log("sending")
+			writeValueToSockets(combinedMessage)
+			combinedMessage = ""
+			if(stringList[1].length > 0) {
+				combinedMessage += stringList[1]
+				console.log("combining other half")
+			}
+		} else {
+			combinedMessage += text
+			console.log("combining")
+		}
+	})
+
+	socket.on('end', () => {
+		console.log('all data has been send')
 	})
 
 	socket.on('close', function(data) {

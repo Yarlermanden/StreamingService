@@ -24,8 +24,6 @@ function Stream() {
 		});
 
 		socket.on("message", data => {
-			//console.log('message: ' + String.fromCharCode.apply(null, new Uint16Array(data.msg)))
-			console.log('message: ' + data)
 			setMessage(data)
 		});
 
@@ -34,11 +32,16 @@ function Stream() {
 	
 	var i = 0
 
+	function updateImage() {
+		return <img src={'data:image/jpeg;base64,'+message} alt="couldn't convert image" />
+	}
+
 	return (
 		<div>
 			<h2> You are now streaming live </h2>
 			<div>
 				<img src={image} alt="image not found"/>
+				{updateImage()}
 				<h3> The text should appear here: {message} </h3>
 				<p>
 					Time: <time dateTime={response}>{response}</time>
