@@ -17,7 +17,8 @@ function Stream() {
 	const [xSlope, setXSlope] = useState(0) //given from backend
 	const [ySlope, setYSlope] = useState(0)
 
-	const endpoint = "http://212.237.131.28:15002"
+	//const endpoint = "http://212.237.131.28:15002"
+	const endpoint = "localhost:5002"
 
 	useEffect(() => {
 		const socket = socketIOClient(endpoint, {
